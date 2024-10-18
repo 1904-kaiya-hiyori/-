@@ -4,9 +4,7 @@ import com.example.forum.controller.form.ReportForm;
 import com.example.forum.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -69,4 +67,21 @@ public class ForumController {
         // 投稿をテーブルに格納した後、その投稿を表示させてトップ画面へ戻るという仕様
         return new ModelAndView("redirect:/");
     }
+
+
+
+    /*
+     * 投稿削除処理
+     */
+    //ここに処理が飛んでくる
+    @DeleteMapping("/delete/{id}")
+    //引数　@PathVariable　form タグ内の action 属性に記述されている
+    // { } 内で指定されたURLパラメータを取得
+    public ModelAndView deleteContent(@PathVariable Integer id) {
+        // 投稿をテーブルに格納
+        reportService.deleteReport(id);
+        // rootへリダイレクト
+        return new ModelAndView("redirect:/");
+    }
+
 }

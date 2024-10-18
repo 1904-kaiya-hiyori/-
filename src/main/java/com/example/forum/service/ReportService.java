@@ -76,4 +76,14 @@ public class ReportService {
         report.setContent(reqReport.getContent());
         return report;
     }
+
+
+    /*
+     * DBから取得したデータを削除
+     */
+    public void deleteReport(Integer id) {
+        //リポジトリの場合
+        reportRepository.deleteById(id);
+        //reportMapper.deleteById(id);
+    }
 }
