@@ -53,6 +53,7 @@ public class ReportService {
      * レコード追加
      * ReportRepositoryのsaveメソッドはテーブルに新規投稿をinsertするような処理
      * saveメソッドには、update文のような処理も兼ね備えている
+     * idの存在を確認して、insert / update判断して実行される
      * メソッドは戻り値なし
      */
     // findAllメソッドとsaveメソッドは JpaRepository で定義されているため、
@@ -60,7 +61,7 @@ public class ReportService {
     public void saveReport(ReportForm reqReport) {
         Report saveReport = setReportEntity(reqReport);
         reportRepository.save(saveReport);
-        //.save() キーが存在する場合は更新、存在しない場合は登録。戻り値 :Entity    }
+        //.save() キーが存在する場合は更新、存在しない場合は登録。戻り値 :Entity
     }
 
     /*
@@ -85,5 +86,18 @@ public class ReportService {
         //リポジトリの場合
         reportRepository.deleteById(id);
         //reportMapper.deleteById(id);
+    }
+
+
+    /*
+     * レコード1件取得
+     */
+    public ReportForm editReport(Integer id) {
+        List<Report> results = new ArrayList<>();
+        // ReportRepository は JpaRepository を継承しているため、
+        // findById() メソッドを使う
+        results.add((Report) reportRepository.findById(id).orElse(null));
+        List<ReportForm> reports = setReportForm(results);
+        return reports.get(0);
     }
 }
