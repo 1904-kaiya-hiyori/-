@@ -9,6 +9,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "report")
 @Getter
@@ -24,6 +26,12 @@ public class Report {
 
     @Column
     private String content;
+
+    //@Column(name = "createDate", insertable = false, updatable = false)
+    //private Date createdDate;
+
+    //@Column(name = "updateDate", insertable = false, updatable = false)
+    //private Date updatedDate;
 
     //public int getId() {
     //     return id;

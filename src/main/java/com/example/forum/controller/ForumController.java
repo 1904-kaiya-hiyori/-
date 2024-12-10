@@ -1,18 +1,32 @@
 package com.example.forum.controller;
 
+import com.example.forum.controller.form.CommentForm;
 import com.example.forum.controller.form.ReportForm;
 import com.example.forum.service.ReportService;
+import com.example.forum.service.CommentService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.validation.FieldError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class ForumController {
     @Autowired
     ReportService reportService;
+
+    @Autowired
+    CommentService commentService;
+
+    @Autowired
+    HttpSession session;
 
     /*
      * 投稿内容表示処理
@@ -119,5 +133,28 @@ public class ForumController {
         return new ModelAndView("redirect:/");
     }
 
+
+    /*
+     * 返信投稿処理
+     */
+    @PostMapping("/addComment/{id}")
+    public ModelAndView addCommentContent(@ModelAttribute("commentFormModel") @Validated CommentForm commentForm, BindingResult result, @PathVariable Integer id){
+        if(result.hasErrors()){
+            List<String> errorMessages = new ArrayList<String>();
+            for(FieldError error : result.getFieldErrors()){
+                String message = error.getDefaultMessage();
+                errorMessages.add(message);
+            }
+            session.setAttribute("reportId", id);
+            session.setAttribute("errorMessages", errorMessages);
+        } else {
+            //reportIdを格納
+            commentForm.setReportId(id);
+            // 投稿をテーブルに格納
+            commentService.saveComment(commentForm);
+        }
+        // rootへリダイレクト
+        return new ModelAndView("redirect:/");
+    }
 
 }

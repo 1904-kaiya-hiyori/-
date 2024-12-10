@@ -36,6 +36,13 @@
             </a>
         </div>
 
+        <div class="comment-button">
+            <!--送信先　{id}はURLパラメータ　投稿を特定する投稿ID-->
+            <!--アクションの内容を置換する(@{}でコンテキスト・パスを相対から絶対へ)-->
+            <form th:action="@{/addComment/{id}(id=${content.id})}" th:method="post">
+                <input type="submit" value="返信">
+            </form>
+        </div>
     </div>
 
 </div>

@@ -1,6 +1,7 @@
 package com.example.forum.service;
 
 import com.example.forum.controller.form.ReportForm;
+import com.example.forum.controller.form.CommentForm;
 import com.example.forum.repository.ReportRepository;
 import com.example.forum.repository.entity.Report;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 //ビジネスロジック等にあたるサービス層に該当するクラスに付与。
@@ -33,20 +35,20 @@ public class ReportService {
     /*
      * DBから取得したデータをFormに設定
      */
-    private List<ReportForm> setReportForm(List<Report> results) {
-        List<ReportForm> reports = new ArrayList<>();
-        //.findAll() すべてのレコードを取得。戻り値：List<Entity>
-
-
-        for (int i = 0; i < results.size(); i++) {
-            ReportForm report = new ReportForm();
-            Report result = results.get(i);
-            report.setId(result.getId());
-            report.setContent(result.getContent());
-            reports.add(report);
-        }
-        return reports;
-    }
+//    private List<ReportForm> setReportForm(List<Report> results) {
+//        List<ReportForm> reports = new ArrayList<>();
+//        //.findAll() すべてのレコードを取得。戻り値：List<Entity>
+//
+//
+//        for (int i = 0; i < results.size(); i++) {
+//            ReportForm report = new ReportForm();
+//            Report result = results.get(i);
+//            report.setId(result.getId());
+//            report.setContent(result.getContent());
+//            reports.add(report);
+//        }
+//        return reports;
+//    }
 
 
     /*
@@ -100,4 +102,48 @@ public class ReportService {
         List<ReportForm> reports = setReportForm(results);
         return reports.get(0);
     }
+
+
+    /*
+     * idによるレコード取得処理
+     */
+    public ReportForm findReportById(Integer id) {
+        Optional<Report> result = reportRepository.findById(id);
+        ReportForm report = (ReportForm) setReportForm(result.orElse(null));
+
+        return report;
+    }
+
+    /*
+     * DBから取得したデータをFormに設定
+     */
+    private List<ReportForm> setReportForm(List<Report> results) {
+        List<ReportForm> reports = new ArrayList<>();
+
+        for (int i = 0; i < results.size(); i++) {
+            ReportForm report = new ReportForm();
+            Report result = results.get(i);
+            report.setId(result.getId());
+            report.setContent(result.getContent());
+            //report.setCreatedDate(result.getCreatedDate());
+            //report.setUpdatedDate(result.getUpdatedDate());
+            reports.add(report);
+        }
+        return reports;
+    }
+
+
+    /*
+     * DBから取得したデータをFormに設定（1個のみ）
+     */
+    private ReportForm setReportForm(Report result) {
+        ReportForm report = new ReportForm();
+        report.setId(result.getId());
+        report.setContent(result.getContent());
+        //report.setCreatedDate(result.getCreatedDate());
+        //report.setUpdatedDate(result.getUpdatedDate());
+
+        return report;
+    }
+
 }
