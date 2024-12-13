@@ -16,6 +16,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class Comment extends AbstractEntity {
+    //Form,Entity　ローワーキャメルケース
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)

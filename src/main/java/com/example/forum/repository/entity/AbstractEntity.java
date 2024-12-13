@@ -13,6 +13,7 @@ import java.util.Date;
 @Setter
 @MappedSuperclass
 public class AbstractEntity {
+    //Form,Entity　ローワーキャメルケース
     @Column(name = "created_date", updatable = false)
     private Date createdDate;
 

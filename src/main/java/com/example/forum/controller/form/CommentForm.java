@@ -10,6 +10,7 @@ import java.util.Date;
 @Setter
 public class CommentForm {
 
+    //Form,Entity　ローワーキャメルケース
     private int id;
     private int reportId;
 

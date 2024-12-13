@@ -10,6 +10,7 @@ import java.util.Date;
 public class ReportForm {
 
     // View（画面の表示管理）への入出力時に使用するJavaBeansのような入れ物
+    //Form,Entity　ローワーキャメルケース
     private int id;
     private String content;
     private Date createdDate;

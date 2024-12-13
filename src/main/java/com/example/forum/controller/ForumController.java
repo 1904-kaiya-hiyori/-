@@ -44,6 +44,13 @@ public class ForumController {
         // 先ほどのcontentDataをModelAndView型の変数mavへ格納
         // 各値がReportForm型のリストである「contentData」へ格納
         mav.addObject("contents", contentData);
+
+        // form用の空のentityを準備
+        CommentForm commentForm = new CommentForm();
+
+        // 準備した空のFormを保管
+        mav.addObject("commentFormModel", commentForm);
+
         // 変数mavを戻り値として返す
         return mav;
     }
@@ -138,7 +145,7 @@ public class ForumController {
      * 返信投稿処理
      */
     @PostMapping("/addComment/{id}")
-    public ModelAndView addCommentContent(@ModelAttribute("commentFormModel") @Validated CommentForm commentForm, BindingResult result, @PathVariable Integer id){
+    public ModelAndView addComment(@ModelAttribute("commentFormModel") @Validated CommentForm commentForm, BindingResult result, @PathVariable Integer id){
         if(result.hasErrors()){
             List<String> errorMessages = new ArrayList<String>();
             for(FieldError error : result.getFieldErrors()){

@@ -19,6 +19,7 @@ import java.util.Date;
 
 public class Report {
 
+    //Form,Entity　ローワーキャメルケース
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
