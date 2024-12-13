@@ -45,10 +45,10 @@ public class ForumController {
         // 各値がReportForm型のリストである「contentData」へ格納
         mav.addObject("contents", contentData);
 
-        // form用の空のentityを準備
+        // 情報を運ぶための箱　form用の空のentityを準備
         CommentForm commentForm = new CommentForm();
 
-        // 準備した空のFormを保管
+        // 画面のユーザが見えている　準備した空のFormを保管
         mav.addObject("commentFormModel", commentForm);
 
         // 変数mavを戻り値として返す
