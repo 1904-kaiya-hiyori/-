@@ -130,3 +130,8 @@ label {
 	margin-left: 10px;
 	color: red;
 }
+
+.date {
+    color : gray;
+    font-size: 10px;
+}
