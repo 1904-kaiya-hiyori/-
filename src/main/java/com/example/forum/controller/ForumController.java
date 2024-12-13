@@ -38,12 +38,18 @@ public class ForumController {
         List<ReportForm> contentData = reportService.findAllReport();
         // この後、Service → Repository へと処理が続く
 
+        //返信を全件取得
+        List<CommentForm> commentData = commentService.findAllComment();
+
+
         // 画面遷移先を指定 「現在のURL」/top へ画面遷移
         mav.setViewName("/top");
         // 投稿データオブジェクトを保管
         // 先ほどのcontentDataをModelAndView型の変数mavへ格納
-        // 各値がReportForm型のリストである「contentData」へ格納
         mav.addObject("contents", contentData);
+        // 返信データオブジェクトを保管
+        // 各値がReportForm型のリストである「contentData」へ格納
+        mav.addObject("comments", commentData);
 
         // 情報を運ぶための箱　form用の空のentityを準備
         CommentForm commentForm = new CommentForm();

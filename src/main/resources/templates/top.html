@@ -45,7 +45,21 @@
                     <input type="submit" value="返信">
                 </div>
             </form>
+            <div class="comment-icon" th:each="comment : ${comments}">
+                <div th:if="${comment.reportId == content.id}">
+                    <div class="text">
+                        返信 : <span th:text="${comment.content}"/>
+                    </div>
+                    <div class="date">
+                        投稿日 : <span th:text="${comment.createdDate}"/> &ensp; 更新日 : <span th:text="${comment.updatedDate}"/>
+                    </div>
+
+                </div>
+            </div>
         </div>
+
+
+
 
     </div>
 

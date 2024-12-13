@@ -23,6 +23,36 @@ public class CommentService {
     CommentRepository commentRepository;
 
     /*
+     * レコード全件取得処理
+     */
+    public List<CommentForm> findAllComment() {
+        List<Comment> results = commentRepository.findAll();
+        List<CommentForm> comments = setCommentForm(results);
+        return comments;
+    }
+
+
+    /*
+     * DBから取得したデータをFormに設定
+     */
+    private List<CommentForm> setCommentForm(List<Comment> results) {
+        List<CommentForm> comments = new ArrayList<>();
+
+        for (int i = 0; i < results.size(); i++) {
+            CommentForm comment = new CommentForm();
+            Comment result = results.get(i);
+            comment.setId(result.getId());
+            comment.setReportId(result.getReportId());
+            comment.setContent(result.getContent());
+            comment.setCreatedDate(result.getCreatedDate());
+            comment.setUpdatedDate(result.getUpdatedDate());
+            comments.add(comment);
+        }
+        return comments;
+    }
+
+
+    /*
      * レコード追加
      */
     public void saveComment(CommentForm reqComment) {
