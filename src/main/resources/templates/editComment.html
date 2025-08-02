@@ -10,7 +10,7 @@
   <h2>返信の編集</h2>
 </div>
 <div class="main-contents">
-  <form th:method="put" th:object="${commentFormModel}" th:action="@{/updateComment/{id}(id=${commentFormModel.id})}">
+  <form th:method="post" th:object="${commentFormModel}" th:action="@{/updateComment/{id}(id=${commentFormModel.id})}">
     <div class="form-area">
       <label>編集内容</label>
 

@@ -97,6 +97,30 @@ public class ForumController {
         return mav;
     }
 
+    /*
+     * 返信編集処理
+     */
+    @PostMapping("/updateComment/{id}")
+    public ModelAndView updateCommentContent(@ModelAttribute("commentFormModel") @Validated CommentForm commentForm, BindingResult result, @PathVariable Integer id){
+        if(result.hasErrors()){
+            ModelAndView mav = new ModelAndView();
+            List<String> errorMessages = new ArrayList<String>();
+            for(FieldError error : result.getFieldErrors()){
+                String message = error.getDefaultMessage();
+                errorMessages.add(message);
+            }
+            mav.addObject("errorMessages", errorMessages);
+            mav.setViewName("/editComment");
+            return mav;
+        }
+
+        commentForm.setId(id);
+        // 投稿をテーブルに格納
+        commentService.saveComment(commentForm);
+        // rootへリダイレクト
+        return new ModelAndView("redirect:/");
+    }
+
 
     /*
      * 新規投稿処理
