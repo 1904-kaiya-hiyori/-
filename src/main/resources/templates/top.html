@@ -54,6 +54,10 @@
                         ↑投稿日 : <span th:text="${comment.createdDate}"/> &ensp; 更新日 : <span th:text="${comment.updatedDate}"/>
                     </div>
 
+                    <div class="editComment-button">
+                        <a th:href="@{/editComment/{id}(id=${comment.id})}">編集</a>
+                    </div>
+
                 </div>
             </div>
         </div>

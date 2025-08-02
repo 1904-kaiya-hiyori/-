@@ -82,6 +82,21 @@ public class ForumController {
         return mav;
     }
 
+    /*
+     * 返信編集画面表示
+     */
+    @GetMapping("/editComment/{id}")
+    public ModelAndView editCommentContent(@PathVariable Integer id) {
+        ModelAndView mav = new ModelAndView();
+        // 前の投稿内容を追加
+        CommentForm commentForm = commentService.findCommentById(id);
+        // 画面遷移先を指定
+        mav.setViewName("/editComment");
+        // 準備した空のFormを保管
+        mav.addObject("commentFormModel", commentForm);
+        return mav;
+    }
+
 
     /*
      * 新規投稿処理

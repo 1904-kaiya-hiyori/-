@@ -73,4 +73,29 @@ public class CommentService {
         comment.setContent(reqComment.getContent());
         return comment;
     }
+
+    /*
+     * idによるレコード取得処理
+     */
+    public CommentForm findCommentById(Integer id) {
+        Optional<Comment> result = commentRepository.findById(id);
+        CommentForm comment = setCommentForm(result.orElse(null));
+
+        return comment;
+    }
+
+    /*
+     * DBから取得したデータをFormに設定（1個のみ）
+     */
+    private CommentForm setCommentForm(Comment result) {
+        CommentForm comment = new CommentForm();
+        comment.setId(result.getId());
+        comment.setReportId(result.getReportId());
+        comment.setContent(result.getContent());
+        comment.setCreatedDate(result.getCreatedDate());
+        comment.setUpdatedDate(result.getUpdatedDate());
+
+        return comment;
+    }
+
 }
