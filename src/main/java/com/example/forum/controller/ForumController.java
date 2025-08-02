@@ -19,6 +19,8 @@ import java.util.List;
 
 @Controller
 public class ForumController {
+    // @Autowired フィールドに付与
+    // 付与したフィールドに合致するオブジェクトを自動的にインジェクション
     @Autowired
     ReportService reportService;
 
@@ -30,6 +32,7 @@ public class ForumController {
 
     /*
      * 投稿内容表示処理
+     * 返信→④
      */
     @GetMapping
     public ModelAndView top() {
@@ -118,6 +121,7 @@ public class ForumController {
     @GetMapping("/edit/{id}")
 
     // { } 内で指定されたURLパラメータを取得
+    // @PathVariableで画面からidを取得
     public ModelAndView editContent(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView();
         // 編集する投稿を取得
@@ -151,6 +155,9 @@ public class ForumController {
      * 返信投稿処理
      */
     @PostMapping("/addComment/{id}")
+
+    //②
+    //ControllerがServiceを呼ぶ
     public ModelAndView addComment(@ModelAttribute("commentFormModel") @Validated CommentForm commentForm, BindingResult result, @PathVariable Integer id){
         if(result.hasErrors()){
             List<String> errorMessages = new ArrayList<String>();
@@ -161,7 +168,7 @@ public class ForumController {
             session.setAttribute("reportId", id);
             session.setAttribute("errorMessages", errorMessages);
         } else {
-            //reportIdを格納
+            //reportIdを格納　返信先のつぶやき
             commentForm.setReportId(id);
             // 投稿をテーブルに格納
             commentService.saveComment(commentForm);

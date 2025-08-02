@@ -53,7 +53,7 @@ public class CommentService {
 
 
     /*
-     * レコード追加
+     * ③返信レコード追加（ビジネスロジック）
      */
     public void saveComment(CommentForm reqComment) {
         Comment saveComment = setCommentEntity(reqComment);

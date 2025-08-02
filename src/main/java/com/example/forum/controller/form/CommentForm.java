@@ -10,6 +10,11 @@ import java.util.Date;
 @Setter
 public class CommentForm {
 
+    //①
+    //HTML側でユーザが入力する画面の入力欄フォーム
+    //画面からの入力を受け取るクラス
+    //バインドしてControllerに渡す
+
     //Form,Entity　ローワーキャメルケース
     private int id;
     private int reportId;

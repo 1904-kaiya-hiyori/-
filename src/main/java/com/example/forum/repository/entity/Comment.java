@@ -16,6 +16,9 @@ import java.util.Date;
 @Getter
 @Setter
 public class Comment extends AbstractEntity {
+
+    //DBとつながるクラス
+
     //Form,Entity　ローワーキャメルケース
     @Id
     @Column
@@ -27,4 +30,12 @@ public class Comment extends AbstractEntity {
 
     @Column
     private String content;
+
+    @Column(name = "createDate", insertable = false, updatable = false)
+    private Date createdDate;
+
+    @Column(name = "updateDate", insertable = false, updatable = false)
+    private Date updatedDate;
+
+
 }

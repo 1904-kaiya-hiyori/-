@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+//④DBアクセス
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 }
